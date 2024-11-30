@@ -1,4 +1,4 @@
-import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,9 +10,9 @@ public class Main {
         double balance = 2500.00;
 
         Locale brazil = new Locale("pt", "BR");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(brazil);
+        Currency currency = Currency.getInstance(brazil);
 
-        System.out.println("Bem vindo ao BankIt\n\n*******************************\nDados iniciais do cliente:\n\nNome: " + nameClient + "\n" + "Número da conta: " + accountNumber + "\n" + "Saldo: " + currencyFormatter.format(balance) + "\n" + "*******************************\n");
+        System.out.println("Bem vindo ao BankIt\n\n*******************************\nDados iniciais do cliente:\n\nNome: " + nameClient + "\n" + "Número da conta: " + accountNumber + "\n" + "Saldo: " + currency.getSymbol() + balance + "\n" + "*******************************\n");
 
         System.out.println("Digite a opção desejada");
         String menuOptions = """
@@ -27,12 +27,12 @@ public class Main {
         while (options != 4) {
             options = input.nextInt();
             if (options == 1) {
-                System.out.println("Seu saldo atual é : " + currencyFormatter.format(balance));
+                System.out.println("Seu saldo atual é : " + currency.getSymbol() + balance);
             } else if (options == 2) {
                 System.out.println("Digite o valor que deseja depositar: ");
                 double deposit = input.nextDouble();
                 balance += deposit;
-                System.out.println("Depósito realizado com sucesso! Seu saldo atual é: " + currencyFormatter.format(balance));
+                System.out.println("Depósito realizado com sucesso! Seu saldo atual é: " + currency.getSymbol() + balance);
             } else if (options == 3) {
                 System.out.println("Digite o valor que deseja transferir: ");
                 double transfer = input.nextDouble();
@@ -40,7 +40,7 @@ public class Main {
                     System.out.println("Saldo insuficiente para realizar a transferência");
                 } else {
                     balance -= transfer;
-                    System.out.println("Transferência realizada com sucesso! Seu saldo atual é: " + currencyFormatter.format(balance));
+                    System.out.println("Transferência realizada com sucesso! Seu saldo atual é: " + currency.getSymbol() + balance);
                 }
             }
             if (options == 4) {
